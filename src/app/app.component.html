@@ -1,0 +1,73 @@
+<body>
+
+  <nav>
+    <div class="container">
+      <ul class="navbar-right">
+        <li><img [src]="profile" class="itemlist">
+          <p class="btncart">Hi Aryan </p>
+        </li>
+        <li>Infinite scroll view</li>
+      </ul>
+    </div>
+  </nav>
+  <div class="containerleft" style="float: left;">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="drag-container">
+          <div class="section-heading">Menu</div>
+          <br>
+          <div cdkDropList #pendingList="cdkDropList" [cdkDropListData]="template" class="item-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="item-box" *ngFor="let item of template" cdkDrag>{{item.name}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="continertwo" *ngIf="template.length>0">
+    <div *ngFor="let temp of template">
+      <!-- <div [ngStyle]="{'background-color':temp.color}"> -->
+      <div [ngStyle]="{'background-color':temp.color}">
+        <br>
+
+        <br>
+        <h1>name: {{temp.name}}</h1>
+        <br><br>
+      </div>
+      <div class="btncontainer">
+        <div class="btnopenedit">
+          <hr id="btnhr">
+
+          <img [src]="circlebtn">
+          <img [src]="plus" class="btnplusedit" (click)="modalService.open('modal-1');">
+          <hr id="btnhr">
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="containers">
+    <div class="contineropen">
+      <!-- <hr> -->
+      <div class="btnopen">
+        <img [src]="circlebtn">
+        <img [src]="plus" class="btnplus" (click)="modalService.open('modal-1');">
+      </div>
+
+      <!-- <hr> -->
+    </div>
+    <jw-modal id="modal-1">
+      <h2>Please select layout for this section </h2>
+      <div class="clearfix">
+        <div *ngFor="let template of templateStructure" class="box" (click)="onAddTemplate(template); "
+          [ngStyle]="{'background-color': template.color}">
+          <h2>{{template.name}}</h2>
+        </div>
+      </div>
+
+      <button id="btn" (click)="modalService.close('modal-1');">Back</button>
+
+    </jw-modal>
+  </div>
+</body>
